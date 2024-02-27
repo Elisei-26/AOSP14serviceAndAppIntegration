@@ -1,0 +1,73 @@
+cc_binary {
+    name: "example_service",
+    srcs: [
+        "native/src/**/*.cpp",
+    ],
+    local_include_dirs: ["native/src/impl"],
+    vendor: true,
+    // system_ext_specific: true,
+    init_rc: ["example_service.rc"],
+    required: ["temperatures.csv"],
+    shared_libs: [
+        "liblog",
+        "libutils",
+        "libbase",
+        "libbinder_ndk",
+        "example.service.api-V3-ndk",
+    ],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wunused",
+        "-Wunreachable-code",
+        "-Wshadow",
+    ],
+    
+}
+
+prebuilt_etc {
+    name: "temperatures.csv",
+    src: "temperatures.csv",
+    filename_from_src: true,
+    vendor: true,
+}
+
+aidl_interface {
+    name: "example.service.api",
+    vendor_available: true,
+    srcs: ["interfaces/**/*.aidl"],
+    local_include_dir: "interfaces",
+
+    stability: "vintf",
+
+    // sdk_version: "current",
+    // system_ext_specific: true,
+    // platform_apis: true,
+
+    backend: {
+        java: {
+            enabled: true,
+            platform_apis: true,
+        },
+        cpp: {
+            enabled: true,
+        },
+        ndk: {
+            enabled: true,
+        },
+    },
+    versions_with_info: [
+        // {
+        //     version: "2",
+        //     imports: [],
+        // },
+        {
+            version: "3",
+            imports: [],
+        },
+
+    ],
+    frozen: true,
+
+}

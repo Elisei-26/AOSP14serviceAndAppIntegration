@@ -1,0 +1,9 @@
+java_library {
+    name: "example.service.manager",
+    srcs: [ "src/example/service/**/*.java" ],
+    static_libs: [ "example.service.api-V3-java" ],
+    // sdk_version: "current",
+    system_ext_specific: true,
+    platform_apis: true,
+    installable: true,
+}
