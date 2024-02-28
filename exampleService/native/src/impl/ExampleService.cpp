@@ -12,7 +12,7 @@ namespace example {
 
       ::std::shared_ptr<ExampleService> ExampleService::S_INSTANCE = NULL;
 
-      ::std::shared_ptr<ExampleService> ExampleService::getInstance() {
+      ::std::shared_ptr<ExampleService> ExampleService::GetInstance() {
          if (S_INSTANCE == NULL) {
             S_INSTANCE = ndk::SharedRefBase::make<ExampleService>();
          }
@@ -20,16 +20,19 @@ namespace example {
       }
 
       ExampleService::ExampleService() {
-         readColumnFromCSV(0, cpuColumnData);
-         readColumnFromCSV(1, gpuColumnData);
-         readColumnFromCSV(2, ambientColumnData);
+         ReadColumnFromCSV(0, cpuColumnData);
+         ReadColumnFromCSV(1, gpuColumnData);
+         ReadColumnFromCSV(2, ambientColumnData);
       }
       ExampleService::~ExampleService() {}
 
-      ::ndk::ScopedAStatus ExampleService::getValues(esapinamespace::ExampleType* _aidl_return) {
+      ::ndk::ScopedAStatus ExampleService::GetValues(esapinamespace::ExampleType* _aidl_return) {
          ::aidl::example::service::api::ExampleType extype;
          
          std::vector<int32_t> cert(10);
+         // for (const auto& i : cert) {
+         //    cert.push(i.index + 1);
+         // }
          for (unsigned int i = 0; i < cert.size(); ++i) {
             cert[i] = i;
          }
@@ -42,54 +45,53 @@ namespace example {
       }
 
 
-      ::ndk::ScopedAStatus ExampleService::getCpuTemperature(float* _aidl_return) {
-         *_aidl_return = cpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetCpuTemperature(float* _aidl_return) {
+         *_aidl_return = CpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getGpuTemperature(float* _aidl_return) {
-         *_aidl_return = gpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetGpuTemperature(float* _aidl_return) {
+         *_aidl_return = CpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getAmbientTemperature(float* _aidl_return) {
-         *_aidl_return = ambientValue();
+      ::ndk::ScopedAStatus ExampleService::GetAmbientTemperature(float* _aidl_return) {
+         *_aidl_return = AmbientValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getAverageCpuTemperature(float* _aidl_return) {
-         *_aidl_return = averageCpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetAverageCpuTemperature(float* _aidl_return) {
+         *_aidl_return = AverageCpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getAverageGpuTemperature(float* _aidl_return) {
-         *_aidl_return = averageGpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetAverageGpuTemperature(float* _aidl_return) {
+         *_aidl_return = AverageGpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getAverageAmbientTemperature(float* _aidl_return) {
-         *_aidl_return = averageAmbientValue();
+      ::ndk::ScopedAStatus ExampleService::GetAverageAmbientTemperature(float* _aidl_return) {
+         *_aidl_return = AverageAmbientValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getMaxCpuTemperature(float* _aidl_return) {
-         *_aidl_return = maxCpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetMaxCpuTemperature(float* _aidl_return) {
+         *_aidl_return = MaxCpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getMaxGpuTemperature(float* _aidl_return) {
-         *_aidl_return = maxGpuValue();
+      ::ndk::ScopedAStatus ExampleService::GetMaxGpuTemperature(float* _aidl_return) {
+         *_aidl_return = MaxGpuValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      ::ndk::ScopedAStatus ExampleService::getMaxAmbientTemperature(float* _aidl_return) {
-         *_aidl_return = maxAmbientValue();
+      ::ndk::ScopedAStatus ExampleService::GetMaxAmbientTemperature(float* _aidl_return) {
+         *_aidl_return = MaxAmbientValue();
          return ndk::ScopedAStatus::ok();
       }
 
-      void ExampleService::readColumnFromCSV(int colIndex, std::vector<float>& columnData) {
-         std::ifstream file;
-         file.open("/vendor/etc/temperatures.csv");
+      void ExampleService::ReadColumnFromCSV(int colIndex, std::vector<float>& columnData) {
+         std::ifstream file("/vendor/etc/temperatures.csv");
          std::string line;
 
          if (file.is_open()) {
@@ -111,7 +113,7 @@ namespace example {
          }
       }
 
-      float ExampleService::getCpuNextValue(std::vector<float>& vec) {
+      float ExampleService::GetCpuNextValue(std::vector<float>& vec) {
          static std::size_t index_cpu = 0;
          if (index_cpu >= vec.size()) {
             index_cpu = 0;
@@ -119,7 +121,7 @@ namespace example {
          return vec[index_cpu++];
       }
 
-      float ExampleService::getGpuNextValue(std::vector<float>& vec) {
+      float ExampleService::GetGpuNextValue(std::vector<float>& vec) {
          static std::size_t index_gpu = 0;
          if (index_gpu >= vec.size()) {
             index_gpu = 0;
@@ -127,7 +129,7 @@ namespace example {
          return vec[index_gpu++];
       }
 
-      float ExampleService::getAmbientNextValue(std::vector<float>& vec) {
+      float ExampleService::GetAmbientNextValue(std::vector<float>& vec) {
          static std::size_t index_ambient = 0;
          if (index_ambient >= vec.size()) {
             index_ambient = 0;
@@ -135,9 +137,15 @@ namespace example {
          return vec[index_ambient++];
       }
 
-      float ExampleService::calculateMaxValue(const std::vector<float>& vec) {
+      float ExampleService::CalculateMaxValue(const std::vector<float>& vec) {
          float max = vec[0]; // Initialize max to the first element of the vector
          // Iterate through the vector to find the maximum element
+         // for (const auto& i.index = 1 : vec) {
+         //    if (i > max) {
+         //          max = i;
+         //    }
+         // }
+
          for (size_t i = 1; i < vec.size(); ++i) {
             if (vec[i] > max) {
                   max = vec[i];
@@ -146,56 +154,59 @@ namespace example {
          return max;
       }
 
-      float ExampleService::calculateAverageValue(const std::vector<float>& vec) {
+      float ExampleService::CalculateAverageValue(const std::vector<float>& vec) {
          float sum = 0.0;
-         for ( int i = 0; i < (int)vec.size(); ++i) {
+         // for (const auto& i : vec) {
+         //    sum += i;
+         // }
+         for (int i = 0; i < (int)vec.size(); ++i) {
             sum += vec[i];
          }
          return ( sum / vec.size());
       }
 
-      float ExampleService::cpuValue() {
-         cpuTemp = getCpuNextValue(cpuColumnData);
+      float ExampleService::CpuValue() {
+         cpuTemp = GetCpuNextValue(cpuColumnData);
          return cpuTemp;
       }
 
-      float ExampleService::gpuValue() {
-         gpuTemp = getGpuNextValue(gpuColumnData);
+      float ExampleService::GpuValue() {
+         gpuTemp = GetGpuNextValue(gpuColumnData);
          return gpuTemp;
       }
 
-      float ExampleService::ambientValue() {
-         ambientTemp = getAmbientNextValue(ambientColumnData);
+      float ExampleService::AmbientValue() {
+         ambientTemp = GetAmbientNextValue(ambientColumnData);
          return ambientTemp;
       }
 
-      float ExampleService::maxCpuValue() {
-         cpuTemp = calculateMaxValue(cpuColumnData);
+      float ExampleService::MaxCpuValue() {
+         cpuTemp = CalculateMaxValue(cpuColumnData);
          return cpuTemp;
       }
 
-      float ExampleService::maxGpuValue() {
-         gpuTemp = calculateMaxValue(gpuColumnData);
+      float ExampleService::MaxGpuValue() {
+         gpuTemp = CalculateMaxValue(gpuColumnData);
          return gpuTemp;
       }
 
-      float ExampleService::maxAmbientValue() {
-         ambientTemp = calculateMaxValue(ambientColumnData);
+      float ExampleService::MaxAmbientValue() {
+         ambientTemp = CalculateMaxValue(ambientColumnData);
          return ambientTemp;
       }
 
-      float ExampleService::averageCpuValue() {
-         cpuTemp = calculateAverageValue(cpuColumnData);
+      float ExampleService::AverageCpuValue() {
+         cpuTemp = CalculateAverageValue(cpuColumnData);
          return cpuTemp;
       }
 
-      float ExampleService::averageGpuValue() {
-         gpuTemp = calculateAverageValue(gpuColumnData);
+      float ExampleService::AverageGpuValue() {
+         gpuTemp = CalculateAverageValue(gpuColumnData);
          return gpuTemp;
       }
 
-      float ExampleService::averageAmbientValue() {
-         ambientTemp = calculateAverageValue(ambientColumnData);
+      float ExampleService::AverageAmbientValue() {
+         ambientTemp = CalculateAverageValue(ambientColumnData);
          return ambientTemp;
       }
    }

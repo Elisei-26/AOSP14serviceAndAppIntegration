@@ -18,9 +18,9 @@ int main() {
 
    signal(SIGPIPE, SIG_IGN);
    if (ABinderProcess_setThreadPoolMaxThreadCount(1)) {
-      std::shared_ptr<esnamespace::ExampleService> esObj = esnamespace::ExampleService::getInstance();
+      std::shared_ptr<esnamespace::ExampleService> esObj = esnamespace::ExampleService::GetInstance();
       if (esObj) {
-         binder_status_t status = AServiceManager_addService(esObj->asBinder().get(), esObj->getServiceName().c_str());
+         binder_status_t status = AServiceManager_addService(esObj->asBinder().get(), esObj->GetServiceName().c_str());
          if (status != STATUS_OK) {
             ALOGE("%s:%d: adding service failed", __FUNCTION__, __LINE__);
          } else {
