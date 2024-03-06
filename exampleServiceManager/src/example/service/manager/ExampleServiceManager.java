@@ -29,55 +29,55 @@ public class ExampleServiceManager {
         }
     }
 
-    public static ExampleServiceManager getInstance() {
+    public static ExampleServiceManager GetInstance() {
         if (instance == null) {
             instance = new ExampleServiceManager();
         }
         return instance;
     }
 
-    public Float getCpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getCpuTemperature");
-        return service.getCpuTemperature();
+    public Float GetCpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetCpuTemperature");
+        return service.GetCpuTemperature();
     }
 
-    public Float getGpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getGpuTemperature");
-        return service.getGpuTemperature();
+    public Float GetGpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetGpuTemperature");
+        return service.GetGpuTemperature();
     }
 
-    public Float getAmbientTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getAmbientTemperature");
-        return service.getAmbientTemperature();
+    public Float GetAmbientTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetAmbientTemperature");
+        return service.GetAmbientTemperature();
     }
 
-    public Float getAverageCpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getAverageCpuTemperature");
-        return service.getAverageCpuTemperature();
+    public Float GetAverageCpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetAverageCpuTemperature");
+        return service.GetAverageCpuTemperature();
     }
 
-    public Float getAverageGpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getAverageGpuTemperature");
-        return service.getAverageGpuTemperature();
+    public Float GetAverageGpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetAverageGpuTemperature");
+        return service.GetAverageGpuTemperature();
     }
 
-    public Float getAverageAmbientTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getAverageAmbientTemperature");
-        return service.getAverageAmbientTemperature();
+    public Float GetAverageAmbientTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetAverageAmbientTemperature");
+        return service.GetAverageAmbientTemperature();
     }
 
-    public Float getMaxCpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getMaxCpuTemperature");
-        return service.getMaxCpuTemperature();
+    public Float GetMaxCpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetMaxCpuTemperature");
+        return service.GetMaxCpuTemperature();
     }
 
-    public Float getMaxGpuTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getMaxGpuTemperature");
-        return service.getMaxGpuTemperature();
+    public Float GetMaxGpuTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetMaxGpuTemperature");
+        return service.GetMaxGpuTemperature();
     }
 
-    public Float getMaxAmbientTemperature() throws RemoteException {
-        Log.i("ExampleServiceManager", "W - getMaxAmbientTemperature");
-        return service.getMaxAmbientTemperature();
+    public Float GetMaxAmbientTemperature() throws RemoteException {
+        Log.i("ExampleServiceManager", "W - GetMaxAmbientTemperature");
+        return service.GetMaxAmbientTemperature();
     }
 }
