@@ -18,14 +18,14 @@ int main() {
 
    signal(SIGPIPE, SIG_IGN);
    if (ABinderProcess_setThreadPoolMaxThreadCount(1)) {
-      std::shared_ptr<esnamespace::ExampleService> esObj = esnamespace::ExampleService::GetInstance();
-      if (esObj) {
-         binder_status_t status = AServiceManager_addService(esObj->asBinder().get(), esObj->GetServiceName().c_str());
+      auto es_obj = esnamespace::ExampleService::GetInstance();
+      if (es_obj) {
+         binder_status_t status = AServiceManager_addService(es_obj->asBinder().get(), es_obj->GetServiceName().c_str());
          if (status != STATUS_OK) {
             ALOGE("%s:%d: adding service failed", __FUNCTION__, __LINE__);
          } else {
             int32_t version = -1;
-            esObj->getInterfaceVersion(&version);
+            es_obj->getInterfaceVersion(&version);
             ALOGI("%s:%d: service ready (registered version V%d)", __FUNCTION__, __LINE__, version);
             ABinderProcess_joinThreadPool();
          }

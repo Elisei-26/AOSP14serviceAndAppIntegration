@@ -9,8 +9,8 @@ namespace example {
    namespace service {
       class ExampleService : public ::aidl::example::service::api::BnExampleService {
          private:
-            static ::std::shared_ptr<ExampleService> S_INSTANCE;
-            void ReadColumnFromCSV(int colIndex, std::vector<float>& columnData);
+            static ::std::shared_ptr<ExampleService> s_instance;
+            void ReadColumnFromCSV(int col_index, std::vector<float>& column_data);
             float GetCpuNextValue(std::vector<float>& vec);
             float GetGpuNextValue(std::vector<float>& vec);
             float GetAmbientNextValue(std::vector<float>& vec);
@@ -27,8 +27,8 @@ namespace example {
             float AverageGpuValue();
             float AverageAmbientValue();
 
-            ::std::vector<float> cpuColumnData, gpuColumnData, ambientColumnData;
-            float cpuTemp, gpuTemp, ambientTemp;
+            ::std::vector<float> cpu_column_data, gpu_column_data, ambient_column_data;
+            float cpu_temp, gpu_temp, ambient_temp;
 
          public:
             ExampleService();
